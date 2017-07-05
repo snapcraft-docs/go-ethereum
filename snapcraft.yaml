@@ -1,0 +1,37 @@
+name: geth
+version: git
+summary: Official Go implementation of the Ethereum protocol
+description: |
+    Official Go implementation of the Ethereum protocol
+
+grade: devel
+confinement: devmode
+
+apps:
+  abigen:
+    command: bin/abigen
+  bootnode:
+    command: bin/bootnode
+  evm:
+    command: bin/evm
+  faucet:
+    command: bin/faucet
+  geth:
+    command: bin/geth --datadir "$SNAP_USER_COMMON/ethereum"
+  puppeth:
+    command: bin/puppeth
+  rlpdump:
+    command: bin/rlpdump
+  swarm:
+    command: bin/swarm
+  wnode:
+    command: bin/wnode
+
+parts:
+  go:
+    source-tag: go1.7.5
+  geth:
+    after: [go]
+    source: .
+    plugin: go
+    go-importpath: github.com/ethereum/go-ethereum
